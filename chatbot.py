@@ -11,11 +11,11 @@ with st.sidebar:
 # OpenAI 라이브러리에 API 키 설정
 openai.api_key = openai_api_key
     
-    thread_id = st.text_input("Thread ID")
+thread_id = st.text_input("Thread ID")
 
-    thread_btn = st.button("Creat a new thered")
+thread_btn = st.button("Creat a new thered")
 
-    if thread_btn:
+if thread_btn:
         thread = client.beta.threads.create()
         thread_id = thread.id
 
