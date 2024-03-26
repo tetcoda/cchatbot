@@ -8,7 +8,7 @@ with st.sidebar:
     openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
     st.markdown("[Get an OpenAI API key](https://platform.openai.com/account/api-keys)")
 
-    client = openai(api_key=openai_api_key)
+    client = api_key=openai_api_key
     # OpenAI 라이브러리에 API 키 설정
     openai.api_key = openai_api_key
     
