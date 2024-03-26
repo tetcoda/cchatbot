@@ -39,9 +39,9 @@ if prompt := st.chat_input():
         st.stop()
 
     # 업로드된 파일의 내용을 가져와서 OpenAI API로 전송
-    if uploaded_file.type == "text/plain":
+    if uploaded_file.mimetype == "text/plain":
         file_content = uploaded_file.getvalue().decode("utf-8")
-    elif uploaded_file.type == "application/msword" or uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+    elif uploaded_file.mimetype in ["application/msword" or uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]:
         import docx
         doc = docx.Document(uploaded_file)
         file_content = "\n".join([para.text for para in doc.paragraphs])
