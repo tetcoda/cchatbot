@@ -49,20 +49,21 @@ if prompt := st.chat_input():
         st.info("Please add your thread ID to continue.")
         st.stop()
 
-    # 업로드된 파일의 내용을 가져와서 OpenAI API로 전송
-    if uploaded_file.type == "text/plain":
-        file_content = uploaded_file.getvalue().decode("utf-8")
-    elif uploaded_file.type == "application/msword" or uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-        import docx
-        doc = docx.Document(uploaded_file)
-        file_content = "\n".join([para.text for para in doc.paragraphs])
+   # 업로드된 파일의 내용을 가져와서 OpenAI API로 전송
+    if uploaded_file is not None:
+        if uploaded_file.type == "text/plain":
+            file_content = uploaded_file.getvalue().decode("utf-8")
+        elif uploaded_file.type == "application/msword" or uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            import docx
+            doc = docx.Document(uploaded_file)
+            file_content = "\n".join([para.text for para in doc.paragraphs])
 
 
-    response = client.beta.threads.messages.create(
-        thread_id,
-        role="user",
-        content=file_content,
-    )
+        response = client.beta.threads.messages.create(
+            thread_id,
+            role="user",
+            content=file_content,
+        )
 
 
     client = OpenAI(api_key=openai_api_key)
